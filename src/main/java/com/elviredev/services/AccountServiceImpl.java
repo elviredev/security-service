@@ -36,7 +36,6 @@ public class AccountServiceImpl implements AccountService {
 
         // attribuer un rôle par défaut à l'utilisateur
         addRoleToUser(username, "USER");
-
         return appUser;
     }
 
