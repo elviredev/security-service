@@ -34,7 +34,7 @@ public class AccountServiceImpl implements AccountService {
         appUser.setPassword(bCryptPasswordEncoder.encode(password));
         appUserRepository.save(appUser);
 
-        // attribuer un rôle à l'utilisateur
+        // attribuer un rôle par défaut à l'utilisateur
         addRoleToUser(username, "USER");
 
         return appUser;
