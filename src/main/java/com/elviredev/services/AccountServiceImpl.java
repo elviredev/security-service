@@ -23,29 +23,30 @@ public class AccountServiceImpl implements AccountService {
     }
 
     @Override
-    public AppUser saveUser(String username, String password, String confirmedPassword) {
+    public AppUser saveAppUser(String username, String password, String confirmedPassword) {
         // enregistrer un utilisateur
         AppUser user = appUserRepository.findByUsername(username);
         if(user != null) throw new RuntimeException("User already exist !");
-        if(password != confirmedPassword) throw new RuntimeException("Please confirm your password !");
+        if(!password.equals(confirmedPassword)) throw new RuntimeException("Please confirm your password !");
         AppUser appUser = new AppUser();
         appUser.setUsername(username);
         appUser.setActivated(true);
         appUser.setPassword(bCryptPasswordEncoder.encode(password));
         appUserRepository.save(appUser);
-
         // attribuer un rôle par défaut à l'utilisateur
         addRoleToUser(username, "USER");
         return appUser;
     }
 
     @Override
-    public AppRole saveRole(AppRole role) {
+    public AppRole saveAppRole(AppRole role) {
+
         return appRoleRepository.save(role);
     }
 
     @Override
     public AppUser loadUserByUsername(String username) {
+
         return appUserRepository.findByUsername(username);
     }
 
