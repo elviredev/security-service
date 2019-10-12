@@ -22,12 +22,12 @@ public class SecurityServiceApplication {
 	CommandLineRunner start(AccountService accountService) {
 		return args -> {
 			// ajout de 2 roles
-			accountService.saveRole(new AppRole(null, "USER"));
-			accountService.saveRole(new AppRole(null, "ADMIN"));
+			accountService.saveAppRole(new AppRole(null, "USER"));
+			accountService.saveAppRole(new AppRole(null, "ADMIN"));
 
 			// ajout utilisateurs
 			Stream.of("user1", "user2", "user3", "admin").forEach(username -> {
-				accountService.saveUser(username, "1234", "1234");
+				accountService.saveAppUser(username, "1234", "1234");
 			});
 
 			// ajout du role admin à l'admin
